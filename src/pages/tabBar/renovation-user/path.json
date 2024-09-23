@@ -1,0 +1,92 @@
+[
+  {
+    "name": "邀请好友",
+    "pageType": "1",
+    "path": "/pages/wd/friendsLnvite/friendsLnvite"
+  },
+  {
+    "name": "团队推广",
+    "pageType": "2",
+    "path": "/pages/wd/promotionTeam/promotionTeam"
+  },
+  {
+    "name": "优惠券",
+    "pageType": "3",
+    "path": "/pages/wd/couponMy/couponMy"
+  },
+  {
+    "name": "积分商城",
+    "pageType": "4",
+    "path": "/pages/jf/inteGral/inteGral"
+  },
+  {
+    "name": "商家入驻",
+    "pageType": "5",
+    "path": "/pages/wd/settlementMerchant/settlementMerchant"
+  },
+  {
+    "name": "地址管理",
+    "pageType": "6",
+    "path": "/pages/wd/address/address"
+  },
+  {
+    "name": "奖品记录",
+    "pageType": "7",
+    "path": "/pages/ddgl/recordPrize/recordPrize"
+  },
+  {
+    "name": "砍价记录",
+    "pageType": "8",
+    "path": "/pages/wd/recordBargain/recordBargain?type=all"
+  },
+  {
+    "name": "我的拼单",
+    "pageType": "9",
+    "path": "/pages/wd/orderMy/orderMy?type=all"
+  },
+  {
+    "name": "联系客服",
+    "pageType": "10",
+    "path": "/pages/benben-built-in/web-view/web-view"
+  },
+  {
+    "name": "系统设置",
+    "pageType": "11",
+    "path": "/pages/xtsz/system/system"
+  },
+  {
+    "name": "消息",
+    "pageType": "12",
+    "path": "/pages/wd/myNews/myNews"
+  },
+  {
+    "name": "用户信息",
+    "pageType": "13",
+    "path": "/pages/wd/myInfo/myInfo"
+  },
+  {
+    "name": "会员中心",
+    "pageType": "14",
+    "path": "/pages/wd/member/member"
+  },
+  {
+    "name": "我的收藏",
+    "pageType": "15",
+    "path": "/pages/wd/myCollections/myCollections"
+  },
+  {
+    "name": "我的关注",
+    "pageType": "16",
+    "path": "/pages/wd/concernMy/concernMy"
+  },
+  {
+    "name": "我的足迹",
+    "pageType": "17",
+    "path": "/pages/wd/myTrack/myTrack"
+  },
+  {
+    "name": "我的钱包",
+    "pageType": "18",
+    "path": "/pages/wd/myMoney/myMoney"
+  }
+]

@@ -1,0 +1,288 @@
+<template>
+  <view>
+    <view @click="closePopup" :class="show ? 'mack-show' :'mack-hide'" class="mack"></view>
+    <view :class="show ? 'comment-show' :'comment-hide'" class="comment-popup">
+      <view class="discuss-title">
+        <text></text>
+        <text>{{ discussNum }}{{ $t('条') }}{{ $t('评论') }}</text>
+        <text @click="closePopup" class="x-text">×</text>
+      </view>
+      <list @loadmore="loadData" :loadmoreoffset="50" style="height: 500rpx">
+        <cell class="discuss-list" v-for="(item, i) in disscusList" :key="i">
+          <view class="discuss-item">
+            <image class="avatar-img" :src="item.avatar" mode="scaleToFill" />
+            <view class="discuss-right">
+              <view class="nickname-row">
+                <view class="nickname-box">
+                  <text class="nickname">
+                    {{ item.nickname }}
+                  </text>
+                  <text v-if="authorId==item.user_id" class="author-text">{{ $t('作者') }}</text>
+                  <text class="reply-btn" @tap="handleReply(item)">{{ $t('回复') }}</text>
+                </view>
+                <text class="discuss-time">{{ item.create_time }}</text>
+              </view>
+              <text class="content-box">
+                {{ item.content }}
+              </text>
+              <template v-for="(val, j) in item.comment_reply_list">
+                <view class="discuss-item" v-if="j<3||seeMoreId==item.aid" :key="j">
+                  <image class="avatar-img2" :src="val.avatar" mode="scaleToFill" />
+                  <view class="discuss-right2">
+                    <view class="nickname-row2">
+                      <view class="nickname-box">
+                        <text class="nickname">
+                          {{ val.nickname }}
+                        </text>
+                        <text v-if="authorId==val.user_id" class="author-text">{{ $t('作者') }}</text>
+                      </view>
+                      <text class="discuss-time">{{ val.create_time }}</text>
+                    </view>
+                    <text class="content-box">
+                      {{ val.content }}
+                    </text>
+                  </view>
+                </view>
+              </template>
+              <text @click="handleSeeMore(item.aid)" v-if="item.comment_reply_list.length>3&& seeMoreId!=item.aid" class="see-more">
+                ∨{{ $t('查看更多') }}
+              </text>
+            </view>
+          </view>
+        </cell>
+        <cell v-if="!disscusList.length" class="empty">
+          <image class="empty-image" :src=" benbenImageSrcResolution('sound.png', 'global')" mode="scaleToFill" />
+          <text class="empty-text">{{ $t('暂无评论') }}</text>
+        </cell>
+      </list>
+      <view class="discuss-bottom-box" v-if="!isReply">
+        <input
+          class="discuss-inpput"
+          confirm-type="send"
+          :placeholder="$t('说点什么吧')"
+          :adjust-position="false"
+          @focus="cancelEmoji"
+          @confirm="sendMsg"
+          type="text"
+          v-model="discussContent"
+        />
+        <image @tap="openEmoji" class="face-icon" :src="benbenImageSrcResolution('biaoqing.png', 'global')" mode="scaleToFill" />
+        <text @tap="sendMsg" class="send-btn">{{ $t('发送') }}</text>
+      </view>
+      <view v-else class="discuss-bottom-box">
+        <text @tap="closeReply" class="close-btn">{{ $t('回复') }}X</text>
+        <input
+          class="discuss-inpput2"
+          confirm-type="send"
+          :adjust-position="false"
+          :placeholder="'@' + replyData.nickname"
+          @focus="cancelEmoji"
+          @confirm="sendMsg"
+          type="text"
+          v-model="discussContent"
+        />
+        <image @tap="openEmoji" class="face-icon" :src="benbenImageSrcResolution('biaoqing.png', 'global')" mode="scaleToFill" />
+        <text @tap="sendMsg" class="send-btn">{{ $t('发送') }}</text>
+      </view>
+      <wj-emoji ref="emoji" @newEmojiStr="emojiAction"></wj-emoji>
+      <view :style="{ height: keyboardHeight }"></view>
+    </view>
+  </view>
+</template>
+<script>
+  import commentPopup from './comment-popup.js'
+  export default commentPopup
+</script>
+
+<style lang="scss">
+  .mack {
+    position: fixed;
+    top: 0;
+    width: 750rpx;
+    height: 2000rpx;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .see-more {
+    width: 500rpx;
+    color: #0c1ad8;
+    font-size: 18rpx;
+    text-align: center;
+    margin-bottom: 20rpx;
+  }
+  .empty {
+    width: 750rpx;
+    height: 500rpx;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 32rpx;
+  }
+  .empty-image {
+    width: 200rpx;
+    height: 200rpx;
+  }
+  .empty-text {
+    color: #999;
+    font-size: 28rpx;
+  }
+  .mack-show {
+    left: 0rpx;
+  }
+  .mack-hide {
+    left: -750rpx;
+  }
+  .comment-popup {
+    position: fixed;
+    width: 750rpx;
+    background-color: #fff;
+    z-index: 100;
+    left: 0;
+    bottom: 0rpx;
+    border-radius: 16rpx 16rpx 0 0;
+    transition-property: transform;
+    transition-timing-function: linear;
+    transition-duration: 0.4s;
+  }
+  .comment-hide {
+    transform: translateY(1000rpx);
+  }
+  .comment-show {
+    transform: translateY(0rpx);
+  }
+  .discuss-title {
+    position: relative;
+    flex-direction: row;
+    width: 750rpx;
+    height: 80rpx;
+    align-items: center;
+    padding: 0 32rpx;
+    justify-content: space-between;
+  }
+  .x-text {
+    font-size: 40rpx;
+  }
+
+  .discuss-bottom-box {
+    height: 100rpx;
+    width: 750rpx;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32rpx;
+  }
+  .discuss-inpput {
+    background-color: #f6f7f9;
+    height: 64rpx;
+    width: 520rpx;
+    border-radius: 32rpx;
+    padding: 0 24rpx;
+  }
+  .discuss-inpput2 {
+    background-color: #f6f7f9;
+    height: 64rpx;
+    width: 430rpx;
+    border-radius: 32rpx;
+    padding: 0 24rpx;
+  }
+  .face-icon {
+    width: 50rpx;
+    height: 50rpx;
+  }
+  .discuss-list {
+    padding: 0 32rpx;
+    width: 750rpx;
+  }
+  .discuss-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .discuss-right {
+    width: 590rpx;
+    align-items: stretch;
+  }
+  .discuss-right2 {
+    width: 520rpx;
+    align-items: stretch;
+  }
+  .nickname-row2 {
+    width: 520rpx;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .avatar-img {
+    width: 72rpx;
+    height: 72rpx;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .avatar-img2 {
+    width: 54rpx;
+    height: 54rpx;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .nickname-row {
+    width: 590rpx;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .content-box {
+    padding-top: 10rpx;
+    font-size: 24rpx;
+    margin-bottom: 20rpx;
+    line-height: 32rpx;
+  }
+  .nickname-box {
+    flex-direction: row;
+    align-items: center;
+  }
+  .reply-btn {
+    font-size: 18rpx;
+    color: #0c1ad8;
+    padding-left: 15rpx;
+  }
+  .nickname {
+    line-height: 36rpx;
+    font-size: 24rpx;
+    color: #666;
+  }
+
+  .author-text {
+    font-size: 18rpx;
+    height: 25rpx;
+    line-height: 25rpx;
+    padding: 0 5rpx;
+    background-color: #fb4c58;
+    border-radius: 4rpx;
+    color: #fff;
+    margin: 0 15rpx;
+  }
+  .discuss-time {
+    font-size: 22rpx;
+    color: #999;
+    padding-left: 15rpx;
+  }
+  .send-btn {
+    width: 70rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    font-size: 18rpx;
+    background-color: #1577fc;
+    color: #fff;
+    border-radius: 4rpx;
+  }
+  .close-btn {
+    width: 70rpx;
+    height: 50rpx;
+    font-size: 18rpx;
+    line-height: 50rpx;
+    text-align: center;
+    background-color: #ff7f50;
+    color: #fff;
+    border-radius: 4rpx;
+  }
+</style>

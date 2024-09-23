@@ -1,0 +1,66 @@
+{
+  "defaultLoadingType": "loading0",
+  "textColor": "#999999",
+  "backgroundColor": "#ffffff",
+  "textSize": 24,
+  "size": 120,
+  "zIndex": 100,
+  "loadingconfig": {
+    "loading0": {
+      "color1": "#1fa2ff",
+      "color2": "#12d8fa",
+      "color3": "#29ffc6"
+    },
+    "loading1": {
+      "color1": "#007aff",
+      "color2": "#1fa2ff",
+      "color3": "#12d8fa",
+      "color4": "#29ffc6"
+    },
+    "loading2": {
+      "color1": "#007aff",
+      "color2": "#1fa2ff",
+      "color3": "#12d8fa",
+      "color4": "#29ffc6"
+    },
+    "loading3": {
+      "color1": "linear-gradient(135deg, #1fa2ff, #12d8fa)",
+      "color2": "#ffffff"
+    },
+    "loading4": {
+      "color1": "linear-gradient(135deg, #1fa2ff, #12d8fa, #29ffc6)"
+    },
+    "loading5": {
+      "color1": "#cccccc",
+      "color2": "radial-gradient(#ff0, #f90)",
+      "color3": "#fed313",
+      "color4": "linear-gradient(#00ff00, #09f, #09f)",
+      "color5": "radial-gradient(#ff9900, #ff4400)"
+    },
+    "loading6": {
+      "color1": "linear-gradient(to bottom, #f00000, #e73827)"
+    },
+    "loading7": {
+      "color1": "#007aff",
+      "color2": "#29ffc6",
+      "color3": "#12d8fa"
+    },
+    "loading8": {
+      "color1": "#12d8fa",
+      "color2": "#29ffc6"
+    },
+    "loading9": {
+      "color1": "#0396ff",
+      "color2": "#dd524d",
+      "color3": "#f0ad4e"
+    },
+    "loading10": {
+      "color1": "#1fa2ff",
+      "color2": "#12d8fa",
+      "color3": "#29ffc6"
+    },
+    "loading11": {
+      "color1": "#1178F0"
+    }
+  }
+}

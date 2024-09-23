@@ -1,0 +1,466 @@
+{
+    "pages": [
+        {
+            "path": "pages/tabBar/home/home",
+            "style": {
+                "navigationBarTitleText": "首页",
+                "enablePullDownRefresh": true,
+                "navigationBarTextStyle": "black",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/tabBar/loginPage/loginPage",
+            "style": {
+                "navigationBarTitleText": "登录",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/tabBar/my/my",
+            "style": {
+                "navigationBarTitleText": "我的",
+                "enablePullDownRefresh": false,
+                "navigationBarTextStyle": "black",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/tabBar/myNews/myNews",
+            "style": {
+                "navigationBarTitleText": "我的消息",
+                "enablePullDownRefresh": true,
+                "navigationBarTextStyle": "black",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/tabBar/paihb/paihb",
+            "style": {
+                "navigationBarTitleText": "排行榜",
+                "enablePullDownRefresh": true,
+                "navigationBarTextStyle": "black",
+                "navigationStyle": "custom",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        }
+    ],
+    "subPackages": [
+        {
+            "root": "pages/benben-built-in",
+            "pages": [
+                {
+                    "path": "playVideo/playVideo",
+                    "style": {
+                        "navigationBarTitleText": "视频播放页面",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "image-cropping/image-cropping",
+                    "style": {
+                        "navigationBarTitleText": "图片裁剪",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "web-view/web-view",
+                    "style": {
+                        "navigationBarTitleText": "",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                }
+            ]
+        },
+        {
+            "root": "pages/dlzc",
+            "pages": [
+                {
+                    "path": "agreements/agreements",
+                    "style": {
+                        "navigationBarTitleText": "用户协议",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "privacyPolicy/privacyPolicy",
+                    "style": {
+                        "navigationBarTitleText": "隐私政策",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "verificationCodeLogin/verificationCodeLogin",
+                    "style": {
+                        "navigationBarTitleText": "验证码登录",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                }
+            ]
+        },
+        {
+            "root": "pages/gdlb",
+            "pages": [
+                {
+                    "path": "bujubsg/bujubsg",
+                    "style": {
+                        "navigationBarTitleText": "要求返工",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "cailiaofp/cailiaofp",
+                    "style": {
+                        "navigationBarTitleText": "材料分配",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "cailiaofpTwo/cailiaofpTwo",
+                    "style": {
+                        "navigationBarTitleText": "选择材料分配",
+                        "enablePullDownRefresh": true,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "dingdanxq/dingdanxq",
+                    "style": {
+                        "navigationBarTitleText": "订单详情",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "faburizhi/faburizhi",
+                    "style": {
+                        "navigationBarTitleText": "发布日志",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "gongxcf/gongxcf",
+                    "style": {
+                        "navigationBarTitleText": "工序处罚",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "linymx/linymx",
+                    "style": {
+                        "navigationBarTitleText": "领用明细",
+                        "enablePullDownRefresh": true,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "sousuo/sousuo",
+                    "style": {
+                        "navigationBarTitleText": "搜索",
+                        "enablePullDownRefresh": true,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "wangbeiz/wangbeiz",
+                    "style": {
+                        "navigationBarTitleText": "确认完工",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "xtbzfp/xtbzfp",
+                    "style": {
+                        "navigationBarTitleText": "系统步骤分配",
+                        "enablePullDownRefresh": true,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "xuanzgr/xuanzgr",
+                    "style": {
+                        "navigationBarTitleText": "选择工人",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                }
+            ]
+        },
+        {
+            "root": "pages/message",
+            "pages": [
+                {
+                    "path": "newDetail/newDetail",
+                    "style": {
+                        "navigationBarTitleText": "制度消息",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "orderMessages/orderMessages",
+                    "style": {
+                        "navigationBarTitleText": "系统消息",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "xuexizx/xuexizx",
+                    "style": {
+                        "navigationBarTitleText": "学习消息",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                }
+            ]
+        },
+        {
+            "root": "pages/my",
+            "pages": [
+                {
+                    "path": "aboutUs/aboutUs",
+                    "style": {
+                        "navigationBarTitleText": "关于我们",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "changeBingDingPhone/changeBingDingPhone",
+                    "style": {
+                        "navigationBarTitleText": "修改绑定手机号",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "changePayPwdMessageCode/changePayPwdMessageCode",
+                    "style": {
+                        "navigationBarTitleText": "改支付密-短信验证",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "changePwd/changePwd",
+                    "style": {
+                        "navigationBarTitleText": "修改密码",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "changePwdOldCode/changePwdOldCode",
+                    "style": {
+                        "navigationBarTitleText": "改密-旧密码验证",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "changePwdPhone/changePwdPhone",
+                    "style": {
+                        "navigationBarTitleText": "修改密码-手机验证",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "feedBack/feedBack",
+                    "style": {
+                        "navigationBarTitleText": "意见反馈",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "feedBackDetail/feedBackDetail",
+                    "style": {
+                        "navigationBarTitleText": "反馈记录",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "inputNewPhone/inputNewPhone",
+                    "style": {
+                        "navigationBarTitleText": "输入新的手机号",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "lianxiwom/lianxiwom",
+                    "style": {
+                        "navigationBarTitleText": "联系我们",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "myInfo/myInfo",
+                    "style": {
+                        "navigationBarTitleText": "我的资料",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "system/system",
+                    "style": {
+                        "navigationBarTitleText": "系统设置",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                },
+                {
+                    "path": "wodexx/wodexx",
+                    "style": {
+                        "navigationBarTitleText": "我的学习",
+                        "enablePullDownRefresh": false,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                }
+            ]
+        },
+        {
+            "root": "pages/phb",
+            "pages": [
+                {
+                    "path": "chufabhbxq/chufabhbxq",
+                    "style": {
+                        "navigationBarTitleText": "处罚排行榜详情",
+                        "enablePullDownRefresh": true,
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "navigationBarBackgroundColor": "#ffffff"
+                    }
+                }
+            ]
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "backgroundColor": "#FFFFFF"
+    },
+    "tabBar": {
+        "backgroundColor": "#ffffff",
+        "color": "#81848F",
+        "selectedColor": "#3090FF",
+        "list": [
+            {
+                "visible": true,
+                "pagePath": "pages/tabBar/home/home",
+                "iconPath": "/static/tab/tab_diy0.png",
+                "selectedIconPath": "/static/tab/tab_diy0_active.png",
+                "text": "工单列表"
+            },
+            {
+                "visible": true,
+                "pagePath": "pages/tabBar/paihb/paihb",
+                "iconPath": "/static/tab/tab_diy1.png",
+                "selectedIconPath": "/static/tab/tab_diy1_active.png",
+                "text": "排行榜"
+            },
+            {
+                "visible": true,
+                "pagePath": "pages/tabBar/myNews/myNews",
+                "iconPath": "/static/tab/tab_diy2.png",
+                "selectedIconPath": "/static/tab/tab_diy2_active.png",
+                "text": "消息"
+            },
+            {
+                "visible": true,
+                "pagePath": "pages/tabBar/my/my",
+                "iconPath": "/static/tab/tab_diy3.png",
+                "selectedIconPath": "/static/tab/tab_diy3_active.png",
+                "text": "我的"
+            }
+        ]
+    }
+}

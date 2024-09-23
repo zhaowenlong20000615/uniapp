@@ -1,0 +1,12 @@
+Android  
+     1. 包名：com.kanghai_foreman.benben
+     2. 证书别名：kanghai_foreman
+     3. 证书密码：123456
+
+
+
+
+ios
+     1. 包名：com.kanghai_foreman.benben
+     2. 证书别名：kanghai_foreman
+     3. 证书密码：123456

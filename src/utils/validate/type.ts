@@ -1,0 +1,16 @@
+export type TVtype =
+  | "regular"
+  | "length"
+  | "require"
+  | "phone"
+  | "captcha"
+  | "isnumber"
+  | "isqq"
+  | "idcard"
+  | "password"
+  | "invitecode"
+  | "ismoney"
+  | "email"
+  | "url"
+  | "paragraph"
+  | "card";

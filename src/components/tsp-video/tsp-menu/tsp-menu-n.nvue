@@ -1,0 +1,475 @@
+<template>
+  <view>
+    <!-- 底部标题 -->
+    <view
+      class="footTitle"
+      :class="[
+        vodIndex == index
+          ? sliderDrag
+            ? 'vodMenu-bright1'
+            : moveOpacity
+            ? 'vodMenu-bright2'
+            : 'vodMenu-bright0'
+          : '',
+      ]"
+    >
+      <view v-if="item.shopNum" class="shop-box" @click="JumpBtn(8)">
+        <image class="shop-icon" :src="benbenImageSrcResolution('shop_icon.png', 'global')" mode="scaleToFill" />
+        <text class="shop-text">{{ $t('查看TA提到的商品') }}({{ item.shopNum }})</text>
+      </view>
+      <text class="foot-name">@{{ item.nickname }}</text>
+      <text class="foot-cont">{{ item.title }}</text>
+      <view class="foot-tag" v-if="item.topic">
+        <text @click="JumpBtn(9)" class="foot-tag-item">{{ item.topic.name }}</text>
+      </view>
+      <view v-if="item.address" class="location-box">
+        <image class="location-icon" :src="benbenImageSrcResolution('location.png', 'global')" mode="scaleToFill" />
+        <text class="location-text">
+          {{ item.address }}
+        </text>
+      </view>
+    </view>
+    <!-- 右侧操作栏 -->
+    <view class="menuBox" :style="{ height: vodHeight + 'px' }">
+      <view
+        class="vodMenu"
+        :class="[
+          vodIndex == index
+            ? sliderDrag
+              ? 'vodMenu-bright1'
+              : moveOpacity
+              ? 'vodMenu-bright2'
+              : 'vodMenu-bright0'
+            : '',
+        ]"
+      >
+        <!-- 头像 -->
+        <view class="vodMenu-top">
+          <view class="menu-avatar">
+            <image @click="JumpBtn(1)" v-if="item.avatar" :src="item.avatar" mode="" class="avatar-image"></image>
+            <image @click="JumpBtn(1)" v-else :src="benbenImageSrcResolution('touxiang.jpg', 'global')" mode="" class="avatar-image"></image>
+          </view>
+          <view class="follow" @click="JumpBtn(2)" v-if="!item.followReally" :class="{ followHide: followShow == 2 }">
+            <image
+              :src="benbenImageSrcResolution('gou.png', 'global')"
+              mode=""
+              class="follow-guanzhu guanzhu-gou"
+              v-if="followShow == 1 || followShow == 2"
+            ></image>
+            <image
+              :src="benbenImageSrcResolution('guanzhu.png', 'global')"
+              mode=""
+              class="follow-guanzhu"
+              v-if="followShow == null || followShow == 0"
+            ></image>
+          </view>
+        </view>
+        <!-- 点赞 -->
+        <view class="fabulous" @click="JumpBtn(3)">
+          <!-- fabulous-taoxin -->
+          <view class="fabulous-image">
+            <image :src="benbenImageSrcResolution('selectTaoxin.png', 'global')" mode="" class="fabulous-image" v-if="item.fabulousShow"></image>
+            <image :src="benbenImageSrcResolution('taoxin.png', 'global')" mode="" class="fabulous-image" v-else></image>
+          </view>
+          <text class="fabulous-num">{{ item.fabulousNum }}</text>
+        </view>
+        <!-- 搜藏 -->
+        <view class="fabulous" style="margin-top: 30rpx" @click="JumpBtn(5)">
+          <view class="fabulous-image">
+            <image v-if="item.collectShow" :src="benbenImageSrcResolution('star_active.png', 'global')" mode="" class="fabulous-image"></image>
+            <image v-else :src="benbenImageSrcResolution('star.png', 'global')" mode="" class="fabulous-image"></image>
+          </view>
+          <text class="fabulous-num" style="font-size: 26rpx">{{ item.collectNum }}</text>
+        </view>
+        <!-- 评论 -->
+        <view class="fabulous" style="margin-top: 30rpx" @click="JumpBtn(4)">
+          <view class="fabulous-image">
+            <image :src="benbenImageSrcResolution('pinlun.png', 'global')" mode="" class="fabulous-image"></image>
+          </view>
+          <text class="fabulous-num">{{ item.discussNum }}</text>
+        </view>
+        <view v-if="isTabbar" class="fabulous" style="margin-top: 30rpx" @click="JumpBtn(6)">
+          <view class="fabulous-image">
+            <image :src="benbenImageSrcResolution('ward.png', 'global')" mode="" class="fabulous-image"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 旋转头像 -->
+    <view
+      class="avatarMenu"
+      v-if="item.rotateImgShow"
+      :class="[
+        vodIndex == index
+          ? sliderDrag
+            ? 'vodMenu-bright1'
+            : moveOpacity
+            ? 'vodMenu-bright2'
+            : 'vodMenu-bright0'
+          : '',
+      ]"
+    >
+      <view style="position: relative; width: 95rpx; height: 95rpx" @click="JumpBtn(7)">
+        <view :ref="'rotateImg' + index">
+          <view class="rotate-avatar">
+            <image :src="benbenImageSrcResolution('touxiang.jpg', 'global')" mode="" class="rotate-image"></image>
+          </view>
+        </view>
+        <view
+          :style="`position: absolute;top: 0;left: 0;opacity:${
+            item.vodPaly ? 0 : 1
+          }`"
+        >
+          <view class="rotate-avatar">
+            <image :src="benbenImageSrcResolution('touxiang.jpg', 'global')" mode="" class="rotate-image"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import { benbenImageSrcResolution } from '@/common/utils/utils.js'
+  const animation = uni.requireNativePlugin('animation')
+  export default {
+    components: {},
+    data() {
+      return {
+        fabulousShow: false,
+        followShow: null,
+        fabuTimeOut: null,
+        rotateNum: 0,
+        rotateTime: null,
+      }
+    },
+    props: {
+      isTabbar: {
+        type: Boolean,
+        default: false,
+      },
+      vodHeight: {
+        //视频部分的高度
+        type: Number,
+        default: 0,
+      },
+      index: {
+        type: Number,
+        default: 0,
+      },
+      vodIndex: {
+        type: Number,
+        default: 0,
+      },
+      item: {
+        type: Object,
+        default: () => {
+          return {}
+        },
+      },
+      discussNum: {
+        type: Number,
+        default: 0,
+      },
+      sliderDrag: {
+        //是否在拖动进度
+        type: Boolean,
+        default: false,
+      },
+      moveOpacity: {
+        //是否透明
+        type: Boolean,
+        default: false,
+      },
+    },
+    methods: {
+      benbenImageSrcResolution,
+      /* 旋转头像动画 */
+      rotateAvatar() {
+        let testEl = this.$refs['rotateImg' + this.vodIndex + '']
+        animation.transition(
+          testEl,
+          {
+            styles: {
+              transform: 'rotate(0deg)',
+            },
+            duration: 0, //ms
+            timingFunction: 'linear',
+            delay: 0, //ms
+          },
+          () => {
+            this.rotateAvatar1()
+          }
+        )
+      },
+      rotateAvatar1() {
+        let testEl = this.$refs['rotateImg' + this.vodIndex + '']
+        animation.transition(
+          testEl,
+          {
+            styles: {
+              transform: 'rotate(360deg)',
+            },
+            duration: 3000, //ms
+            timingFunction: 'linear',
+            delay: 0, //ms
+          },
+          () => {
+            this.rotateAvatar()
+          }
+        )
+      },
+      // /* 视频点赞动效 */
+      // fabulousBtn(index) {
+      //   clearTimeout(this.fabuTimeOut)
+      //   this.fabuTimeOut = setTimeout(() => {
+      //     this.$emit('fabulousBtn', index) //关注成功
+      //   }, 200)
+      // },
+      // /* 关注动效 */
+      // followBtn() {
+      //   this.followShow = 0
+      //   setTimeout(() => {
+      //     this.followShow = 1
+      //     setTimeout(() => {
+      //       this.followShow = 2
+      //       setTimeout(() => {
+      //         this.$emit('followBtn', index) //关注成功
+      //       }, 500)
+      //     }, 50)
+      //   }, 300)
+      // },
+      /* 点击右侧菜单选项 1头像 2点赞 3评论 4转发 5旋转头像 */
+      JumpBtn(index) {
+        this.$emit('jumpBtn', index)
+      },
+    },
+  }
+</script>
+
+<style>
+  .menuBox {
+    position: absolute;
+    right: 10rpx;
+    width: 115rpx;
+    z-index: 8;
+    justify-content: center;
+  }
+  .foot-tag {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .foot-tag-item {
+    padding: 0 10rpx;
+    font-size: 22rpx;
+    background-color: rgba(49, 153, 229, 0.2);
+    color: #3199e5;
+    margin-right: 5rpx;
+    margin-bottom: 5rpx;
+    line-height: 28rpx;
+    border-radius: 16rpx;
+  }
+  .shop-box {
+    padding: 0 15rpx;
+    height: 32rpx;
+    background-color: rgba(255, 255, 255, 0.3);
+    align-items: center;
+    flex-direction: row;
+    border-radius: 16rpx;
+    margin-bottom: 10rpx;
+  }
+  .shop-icon {
+    width: 16rpx;
+    height: 16rpx;
+    margin-right: 5rpx;
+  }
+  .shop-text {
+    font-size: 20rpx;
+    color: #fff;
+  }
+  .location-box {
+    padding: 0 10rpx;
+    height: 32rpx;
+    background-color: rgba(255, 255, 255, 0.3);
+    align-items: center;
+    flex-direction: row;
+    border-radius: 16rpx;
+  }
+  .location-icon {
+    width: 16rpx;
+    height: 16rpx;
+    margin-right: 5rpx;
+  }
+  .location-text {
+    max-width: 200rpx;
+    font-size: 20rpx;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    lines: 1;
+  }
+  .avatarMenu {
+    position: absolute;
+    bottom: 20px;
+    right: 10rpx;
+    width: 115rpx;
+    z-index: 8;
+    align-items: center;
+    flex-direction: column;
+  }
+  .vodMenu {
+    margin-top: 100rpx;
+    width: 115rpx;
+    width: 115rpx;
+    align-items: center;
+    flex-direction: column;
+  }
+  .vodMenu-bright0 {
+    opacity: 1;
+    transition-property: opacity;
+    transition-timing-function: linear;
+    transition-duration: 0.3s;
+  }
+  .vodMenu-bright1 {
+    opacity: 0;
+    transition-property: opacity;
+    transition-timing-function: linear;
+    transition-duration: 0.3s;
+  }
+  .vodMenu-bright2 {
+    opacity: 0.2;
+    transition-property: opacity;
+    transition-timing-function: linear;
+    transition-duration: 0.3s;
+  }
+  .vodMenu-top {
+    height: 140rpx;
+    width: 115rpx;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .menu-avatar {
+    position: relative;
+    width: 115rpx;
+    height: 115rpx;
+    border-radius: 115rpx;
+    background-color: #ffffff;
+    align-items: center;
+    justify-content: center;
+  }
+  .avatar-image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 100rpx;
+  }
+  .follow {
+    position: absolute;
+    bottom: 0;
+    width: 40rpx;
+    height: 40rpx;
+    background-color: #ffffff;
+    border-radius: 40rpx;
+    align-items: center;
+    justify-content: center;
+  }
+  /* .follow:active {
+    transition-property: transform;
+    transition-timing-function: linear;
+    transition-duration: 0.4s;
+    transform: scale(0.7);
+  } */
+  .follow-guanzhu {
+    width: 40rpx;
+    height: 40rpx;
+  }
+  .guanzhu-gou {
+    width: 30rpx;
+    height: 30rpx;
+  }
+  .followActive {
+    transition-property: transform;
+    transition-timing-function: linear;
+    transition-duration: 0.5s;
+    transform: rotate(180deg);
+  }
+  .followHide {
+    transition-property: transform;
+    transition-timing-function: linear;
+    transition-duration: 0.5s;
+    transform: scale(0);
+  }
+  .fabulous {
+    width: 100rpx;
+    margin-top: 80rpx;
+    align-items: center;
+    flex-direction: column;
+  }
+  .fabulous-image {
+    width: 80rpx;
+    height: 80rpx;
+  }
+  .fabulous-num {
+    width: 100rpx;
+    font-size: 28rpx;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 10rpx;
+  }
+  .fabulous-taoxin:active {
+    transition-property: transform;
+    transition-timing-function: linear;
+    transition-duration: 0.2s;
+    transform: scale(0.7);
+  }
+  .fabulous-taoxin:enabled {
+    transition-property: transform;
+    transition-timing-function: linear;
+    transition-duration: 0.2s;
+    transform: scale(1);
+  }
+  /* 底部标题部分 */
+  .footTitle {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 500rpx;
+    margin-left: 30rpx;
+    align-items: flex-start;
+  }
+  .foot-name {
+    font-size: 30rpx;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 5rpx;
+  }
+  .foot-cont {
+    line-height: 32rpx;
+    font-size: 24rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5rpx;
+    /* white-space: nowrap; */
+    lines: 2;
+    color: #ffffff;
+  }
+  .foot-primary {
+    font-size: 27rpx;
+    color: #ffffff;
+  }
+  .rotate-avatar {
+    width: 95rpx;
+    height: 95rpx;
+    border-radius: 95rpx;
+    background-color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rotate-image {
+    width: 55rpx;
+    height: 55rpx;
+    border-radius: 55rpx;
+  }
+</style>
